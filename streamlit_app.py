@@ -47,12 +47,11 @@ if not st.session_state.payments_df.empty:
     counts = df["Name"].value_counts().reset_index()
     counts.columns = ["Name", "Times Paid"]
     st.table(counts)
-    # Convert Date to string for display to hide hours
-    display_df = df.copy()
-    display_df["Date"] = display_df["Date"].astype(str)
-    
+
     with st.expander("📅 Payment History", expanded=False):
-        st.dataframe(df)
+        df_display = df.copy()
+        df_display["Date"] = df_display["Date"].dt.date  # keep only the date part
+        st.dataframe(df_display)
 
     st.subheader("🗓️ Calendar View")
     grouped = (
