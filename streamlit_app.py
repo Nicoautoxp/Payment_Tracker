@@ -26,7 +26,7 @@ payer = st.text_input("Who paid?")
 payment_date = st.date_input("Payment date", value=date.today())
 
 # Button click: update session and sheet
-if st.button("Add Payment"):
+if st.button("Add Payment",type="primary"):
     if payer:
         new_entry = pd.DataFrame([{"Name": payer, "Date": str(payment_date)}])
         st.session_state.payments_df = pd.concat([st.session_state.payments_df, new_entry], ignore_index=True)
